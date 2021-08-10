@@ -1,0 +1,21 @@
+
+version: "3.8"
+services:
+    api:
+        build:
+            dockerfile: Dockerfile
+            context: .
+        depends_on: 
+            - db
+        ports:
+            - "8080:8080"
+        volumes: 
+            - "./:/app"
+            - "/app/node_modules"
+
+    db:
+        image: mongo
+        volumes:
+            - ./docker-volume/db:/data/db
+        ports:
+            - 27017:27017
